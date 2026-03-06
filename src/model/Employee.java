@@ -1,18 +1,20 @@
-import java.util.Date;
+package src.model;
+
+import java.time.LocalDate;
 
 public abstract class Employee {
     // Attributes
-    protected int id;
-    protected String firstName, lastName,
+    private int id;
+    private String firstName, lastName,
             email, phone,
             department;
-    protected Date hireDate;
-    protected double salary;
+    private LocalDate hireDate;
+    private double salary;
 
     // Default Constructor
     public Employee() {
         this.setId(0);
-        this.setFistName("");
+        this.setFirstName("");
         this.setLastName("");
         this.setEmail("");
         this.setPhone("");
@@ -24,9 +26,9 @@ public abstract class Employee {
     // Full Constructor
     public Employee(int id, String firstName, String lastName,
             String email, String phone, String department,
-            Date hireDate, double salary) {
+            LocalDate hireDate, double salary) {
         this.setId(id);
-        this.setFistName(firstName);
+        this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
         this.setPhone(phone);
@@ -60,7 +62,7 @@ public abstract class Employee {
         return this.department;
     }
 
-    public Date getHireDate() {
+    public LocalDate getHireDate() {
         return this.hireDate;
     }
 
@@ -68,12 +70,14 @@ public abstract class Employee {
         return this.salary;
     }
 
+    // Setters
     public void setId(int id) {
-        this.id = id;
+        if (id >= 0) {
+            this.id = id;
+        }
     }
 
-    // Setters
-    public void setFistName(String firstName) {
+    public void setFirstName(String firstName) {
         if (firstName != null) {
             this.firstName = firstName;
         }
@@ -103,8 +107,8 @@ public abstract class Employee {
         }
     }
 
-    public void setHireDate(Date date) {
-        this.hireDate = date;
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
     }
 
     public void setSalary(double salary) {
@@ -114,6 +118,28 @@ public abstract class Employee {
     }
 
     // Methods
+    @Override
+    public String toString() {
+        return String.format(
+                "id: %d, first name: %s, last name: %s, email: %s, phone: %s, department: %s, hire date: %s, salary: %.2f",
+                this.getId(), this.getFirstName(), this.getLastName(), this.getEmail(), this.getPhone(),
+                this.getDepartment(), String.valueOf(this.getHireDate()), this.getSalary());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Employee))
+            return false;
+        return this.id == ((Employee) o).id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(this.id);
+    }
+
     public String getFullName() {
         return String.format("%s %s", this.getFirstName(), this.getLastName());
     }

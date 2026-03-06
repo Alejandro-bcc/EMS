@@ -1,4 +1,6 @@
-import java.util.Date;
+package src.model;
+
+import java.time.LocalDate;
 
 public class Manager extends Employee {
     // Default Constructor
@@ -9,14 +11,17 @@ public class Manager extends Employee {
     // Full Constructor
     public Manager(int id, String firstName, String lastName,
             String email, String phone, String department,
-            Date hireDate, double salary) {
+            LocalDate hireDate, double salary) {
         super(id, firstName, lastName, email, phone, department, hireDate, salary);
     }
 
+    // Methods
+    @Override
     public String getRole() {
         return "Manager";
     }
 
+    @Override
     public int getVacationDays() {
         return 20;
     }
