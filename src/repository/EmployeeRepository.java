@@ -7,6 +7,7 @@ public class EmployeeRepository {
     // Attributes
     private static EmployeeRepository instance;
     private ArrayList<Employee> employees;
+    private int nextId = 1;
 
     // Constructor
     private EmployeeRepository() {
@@ -23,5 +24,9 @@ public class EmployeeRepository {
 
     public ArrayList<Employee> getEmployees() {
         return this.employees;
+    }
+
+    public int generateId() {
+        return this.nextId++;
     }
 }

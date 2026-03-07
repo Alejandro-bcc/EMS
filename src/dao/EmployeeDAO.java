@@ -23,11 +23,61 @@ public class EmployeeDAO {
     }
 
     public Employee findById(int id) {
-        for (Employee e : this.repository.getEmployees()) {
+        ArrayList<Employee> list = this.repository.getEmployees();
+
+        for (int i = 0; i < list.size(); i++) {
+            Employee e = list.get(i);
             if (e.getId() == id)
                 return e;
         }
         return null;
+    }
+
+    public ArrayList<Employee> findByName(String query) {
+        if (query == null || query.isBlank())
+            return this.findAll();
+
+        ArrayList<Employee> list = this.repository.getEmployees();
+        ArrayList<Employee> arr = new ArrayList<Employee>();
+        String q = query.toLowerCase();
+
+        for (int i = 0; i < list.size(); i++) {
+            Employee e = list.get(i);
+            if (e.getFirstName().toLowerCase().contains(q) ||
+                    e.getLastName().toLowerCase().contains(q))
+                arr.add(e);
+        }
+        return arr;
+    }
+
+    public ArrayList<Employee> findByDepartment(String department) {
+        if (department == null || department.isBlank())
+            return this.findAll();
+
+        ArrayList<Employee> list = this.repository.getEmployees();
+        ArrayList<Employee> arr = new ArrayList<Employee>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Employee e = list.get(i);
+            if (e.getDepartment().equalsIgnoreCase(department))
+                arr.add(e);
+        }
+        return arr;
+    }
+
+    public ArrayList<Employee> findByRole(String role) {
+        if (role == null || role.isBlank())
+            return this.findAll();
+
+        ArrayList<Employee> list = this.repository.getEmployees();
+        ArrayList<Employee> arr = new ArrayList<Employee>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Employee e = list.get(i);
+            if (e.getRole().equalsIgnoreCase(role))
+                arr.add(e);
+        }
+        return arr;
     }
 
     public ArrayList<Employee> findAll() {
@@ -39,9 +89,11 @@ public class EmployeeDAO {
     }
 
     public boolean update(Employee updated) {
-        for (int i = 0; i < this.repository.getEmployees().size(); i++) {
-            if (this.repository.getEmployees().get(i).getId() == updated.getId()) {
-                this.repository.getEmployees().set(i, updated);
+        ArrayList<Employee> list = this.repository.getEmployees();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == updated.getId()) {
+                list.set(i, updated);
                 return true;
             }
         }

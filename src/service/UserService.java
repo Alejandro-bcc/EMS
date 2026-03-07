@@ -3,9 +3,10 @@ package src.service;
 import src.dao.UserDAO;
 import src.model.User;
 import src.session.Session;
+import src.service.PasswordHasher;
 import java.util.regex.Pattern;
 
-public class UserService {
+public class UserService implements IUserService {
     // Attributes
     private UserDAO dao;
 
@@ -15,8 +16,11 @@ public class UserService {
     }
 
     // Methods
-    public boolean register(String username, String email, String passwordHash) {
-        String userRegex = "^[a-zA-Z0-9_-]{3,16}$";
+    public boolean register(String username, String email, String rawPassword) {
+        if (username == null || email == null)
+            return false;
+
+        String userRegex = "^[a-zA-Z0-9_-]{4,20}$";
         String emailRegex = "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$";
 
         if (!Pattern.matches(userRegex, username) ||
@@ -25,8 +29,11 @@ public class UserService {
                 this.dao.existsByEmail(email)) {
             return false;
         }
-        User u = new User(username, email, passwordHash);
-        this.dao.add(u);
+        if (rawPassword == null || rawPassword.length() < 6)
+            return false;
+
+        String hash = PasswordHasher.hashPassword(rawPassword);
+        this.dao.add(new User(username, email, hash));
         return true;
     }
 
@@ -36,9 +43,9 @@ public class UserService {
         return this.dao.remove(username);
     }
 
-    public boolean login(String username, String passwordHash) {
+    public boolean login(String username, String rawPassword) {
         User u = this.dao.findByUsername(username);
-        if (u != null && u.getPasswordHash().equals(passwordHash)) {
+        if (u != null && PasswordHasher.verifyPassword(rawPassword, u.getPasswordHash())) {
             Session.getInstance().login(u);
             return true;
         }

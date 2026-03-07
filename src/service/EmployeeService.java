@@ -4,7 +4,7 @@ import src.dao.EmployeeDAO;
 import src.model.Employee;
 import java.util.ArrayList;
 
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService {
     // Attribute
     private EmployeeDAO dao;
 
@@ -33,9 +33,17 @@ public class EmployeeService {
         return this.dao.findById(id);
     }
 
-    // public ArrayList<Employee> findByName(String query){}
-    // public ArrayList<Employee> findByDepartment(String department){}
-    // public ArrayList<Employee> findByRole(String role){}
+    public ArrayList<Employee> findByName(String query) {
+        return this.dao.findByName(query);
+    }
+
+    public ArrayList<Employee> findByDepartment(String department) {
+        return this.dao.findByDepartment(department);
+    }
+
+    public ArrayList<Employee> findByRole(String role) {
+        return this.dao.findByRole(role);
+    }
 
     public ArrayList<Employee> findAll() {
         return this.dao.findAll();

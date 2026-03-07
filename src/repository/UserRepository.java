@@ -1,16 +1,16 @@
 package src.repository;
 
 import src.model.User;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserRepository {
     // Atributes
     private static UserRepository instance;
-    private ArrayList<User> users;
+    private HashMap<String, User> users;
     
     // Constructor 
     private UserRepository(){
-        this.users = new ArrayList<User>();
+        this.users = new HashMap<String, User>();
     }
 
     // Methods 
@@ -21,7 +21,7 @@ public class UserRepository {
         return instance;
     }
 
-    public ArrayList<User> getUsers(){
+    public HashMap<String, User> getUsers(){
         return this.users;
     }
 }

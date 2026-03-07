@@ -2,7 +2,6 @@ package src.dao;
 
 import src.model.User;
 import src.repository.UserRepository;
-import java.util.ArrayList;
 
 public class UserDAO {
     // Attributes
@@ -15,23 +14,22 @@ public class UserDAO {
 
     // Methods
     public void add(User u) {
-        this.repository.getUsers().add(u);
+        this.repository.getUsers().put(u.getUsername(), u);
     }
 
     public boolean remove(String username) {
-        return this.repository.getUsers().removeIf(u -> u.getUsername() == username);
+        if (!this.repository.getUsers().containsKey(username))
+            return false;
+        this.repository.getUsers().remove(username);
+        return true;
     }
 
     public User findByUsername(String username) {
-        for (User u : this.repository.getUsers()) {
-            if (u.getUsername().equals(username))
-                return u;
-        }
-        return null;
+        return this.repository.getUsers().get(username);
     }
 
     public User findByEmail(String email) {
-        for (User u : this.repository.getUsers()) {
+        for (User u : this.repository.getUsers().values()) {
             if (u.getEmail().equals(email))
                 return u;
         }
