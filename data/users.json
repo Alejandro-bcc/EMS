@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "alejandro",
+      "email": "alejandro@email.com",
+      "passwordHash": "wVWc+e1r0cZ3IjduuGPO6w\u003d\u003d:of87VXol7iTVCagiUCaVoDHJRpv30NnVxMrZo/hSIMc\u003d"
+    },
+    {
+      "username": "Pietro",
+      "email": "pietro@gmail.com",
+      "passwordHash": "EjBC2B9fwABs5tlexn4hiQ\u003d\u003d:DeiygtXw3ykeAVa1Jiciqk5NvWDgkbW9Xn6Q3Qcb1/M\u003d"
+    }
+  ]
+}

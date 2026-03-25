@@ -1,5 +1,5 @@
 {
-  "nextId": 18,
+  "nextId": 16,
   "employees": [
     {
       "id": 1,
@@ -7,10 +7,10 @@
       "lastName": "Silva",
       "email": "joao@email.com",
       "phone": "4159382741",
-      "department": "IT",
+      "department": "FINANCE",
       "hireDate": "2023-05-14",
-      "salary": 9200.0,
-      "role": "Developer"
+      "salary": 10200.0,
+      "role": "Manager"
     },
     {
       "id": 2,
@@ -161,32 +161,10 @@
       "lastName": "Teixeira",
       "email": "renato@email.com",
       "phone": "7192834506",
-      "department": "Operations",
-      "hireDate": "2024-03-12",
-      "salary": 8450.0,
-      "role": "Developer"
-    },
-    {
-      "id": 16,
-      "firstName": "Camila",
-      "lastName": "Ribeiro",
-      "email": "cami@email.com",
-      "phone": "3196042278",
-      "department": "Marketing",
-      "hireDate": "2022-09-25",
-      "salary": 8900.0,
-      "role": "Manager"
-    },
-    {
-      "id": 17,
-      "firstName": "Alejandro",
-      "lastName": "Nava",
-      "email": "alejandro@email.com",
-      "phone": "41984080402",
       "department": "IT",
-      "hireDate": "2026-04-01",
-      "salary": 1800.0,
-      "role": "Intern"
+      "hireDate": "2024-03-12",
+      "salary": 8650.0,
+      "role": "Manager"
     }
   ]
 }
